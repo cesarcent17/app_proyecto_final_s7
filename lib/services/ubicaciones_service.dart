@@ -1,18 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/ubicacion.dart';
 
 class UbicacionesService {
-  final CollectionReference col =
-      FirebaseFirestore.instance.collection('ubicaciones');
+  final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  Future<void> registrarUbicacion(Ubicacion u) async {
-    await col.add(u.toMap());
-  }
-
-  Future<List<Ubicacion>> obtenerPorUsuario(String uid) async {
-    final snap = await col.where('uid_usuario', isEqualTo: uid).get();
-    return snap.docs
-        .map((d) => Ubicacion.fromMap(d.id, d.data() as Map<String, dynamic>))
-        .toList();
+  Future<void> registrarUbicacion(double lat, double lng, String uid) async {
+    await db.collection("ubicaciones").add({
+      "latitud": lat,
+      "longitud": lng,
+      "uid": uid,
+      "fecha": DateTime.now(),
+    });
   }
 }

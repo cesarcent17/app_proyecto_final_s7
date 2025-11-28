@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Reporte {
   String? id;
   String titulo;
@@ -17,18 +19,19 @@ class Reporte {
     return {
       "titulo": titulo,
       "descripcion": descripcion,
-      "fecha": fecha,
+      "fecha": Timestamp.fromDate(fecha),
       "uid_usuario": uidUsuario,
     };
   }
 
-  static Reporte fromMap(String id, Map<String, dynamic> map) {
+  static Reporte fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return Reporte(
-      id: id,
-      titulo: map['titulo'],
-      descripcion: map['descripcion'],
-      fecha: (map['fecha'] as Timestamp).toDate(),
-      uidUsuario: map['uid_usuario'],
+      id: doc.id,
+      titulo: data["titulo"],
+      descripcion: data["descripcion"],
+      fecha: (data["fecha"] as Timestamp).toDate(),
+      uidUsuario: data["uid_usuario"],
     );
   }
 }

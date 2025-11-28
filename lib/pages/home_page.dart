@@ -7,6 +7,7 @@ import '../pages/perfil_page.dart';
 
 import 'package:app_proyecto_final_s7/pages/mapa_page.dart';
 import 'package:app_proyecto_final_s7/pages/reportes_page.dart';
+// import 'package:app_proyecto_final_s7/pages/ReportesTestPage.dart';
 import 'package:app_proyecto_final_s7/pages/sensores_page.dart';
 import 'package:app_proyecto_final_s7/pages/perfil_page.dart';
 
